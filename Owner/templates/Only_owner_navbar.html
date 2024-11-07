@@ -12,9 +12,9 @@
 
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2lf1HXz9V24aKaB5n44DgyM5O2mDfDpoE5foiKvRXebnufb8zt4elz" crossorigin="anonymous">
     <!-- Tab Logo -->
-    <link rel="icon" href="{% static 'img/Logos/TabTop2Logo.png' %}" type="image/gif" sizes="18x18">
+    <link rel="icon" href="{% static 'img/Logos/favicon.png' %}" type="image/gif" sizes="18x18">
 
     <title>Fast Rentals - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/owner.css' %}">
@@ -23,7 +23,7 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: large;" aria-label="" aria-labbelledby="">
+    {% comment %} <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: large;" aria-label="" aria-labbelledby="">
         <a href="/Owner"><img class="navbar-brand" src="{% static 'img/Logos/Trial3Logo.png' %}" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -32,7 +32,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/Owner" style="color: #f1f1f1;">Home</a>
+                    <a class="nav-link" href="/Owner" style="color: #f1f1f1;">Home1111111</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -92,7 +92,8 @@
             </ul>
 
         </div>
-    </nav>
+    </nav> {% endcomment %}
+    {% include "includes/navbar.html" %}
 
     <div class="container-fluid">
         {% block pagecontent %} {% endblock pagecontent %}
