@@ -6,29 +6,20 @@
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Home {% endblock %}</title>
-    <style>
-        
-    </style>
-    
 </head>
 
 <body>
     {% block name %}{{owner.Owner_firstname}}{%endblock%} {% block pagecontent %} {%if Message%}
-    <div class="alert alert-success alert-dismissible fade show my-2 p-4 position-relative shadow-sm rounded-lg" role="alert" style="border: 0px solid #c3e6cb; background-color: #e9f7ef; color: #155724;">
-        <div class="d-flex align-items-center">
-            <i class="fas fa-check-circles mr-2" style="font-size: 1.5rem; color: #28a745;"></i>
-            <div>
-                <strong>{{ Message }}!</strong> <!-- Make sure 'Message' is capitalized as 'message' in Django template rendering -->
-            </div>
-        </div>
-        <button type="button" class="close position-absolute" data-dismiss="alert" aria-label="Close" style="top: 10px; right: 10px;">
-            <span aria-hidden="true">&times;</span>
-        </button>
+    <div class="alert alert-success alert-dismissible fade show my-2" role="alert">
+        <strong>{{Message}}!!</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
     </div>
-    
     {%endif%}
     <div class="container">
         <div class="row">
+
             {% for v in vehicle %}
             <div class="col-sm-4 my-4">
                 <div class="card h-100 border-0 shadow-sm rounded-lg overflow-hidden" style="width: 100%;">
@@ -72,7 +63,6 @@
                 </div>
             </div>
             {% endfor %}
-            
 
 
         </div>

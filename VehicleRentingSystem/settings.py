@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'VehicleRentingSystem.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'edrive',
+        'NAME': 'VechileRentalSystem',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost', 

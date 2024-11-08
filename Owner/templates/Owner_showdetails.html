@@ -84,11 +84,14 @@
                         <form action="{% url 'OwnerCheckAvailability' vehicle.Vehicle_license_plate %}" class="px-4 py-3" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-row">
+                                 
                                 <div class="col-4">
-                                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="RentVehicle_Date_of_Booking" class="form-control" placeholder="Pickup date" required>
+                                    <input type="date" onfocus="(this.type='date')" onblur="(this.type='text')" name="RentVehicle_Date_of_Booking" class="form-control" placeholder="Pickup date" required>
+                                    {% comment %} <input type="date" name="RentVehicle_Date_of_Booking" class="form-control" placeholder="Pickup date" required> {% endcomment %}
                                 </div>
                                 <div class="col-4">
-                                    <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" name="RentVehicle_Date_of_Return" class="form-control" placeholder="Return date" required>
+                                    <input type="date" onfocus="(this.type='date')" onblur="(this.type='text')" name="RentVehicle_Date_of_Return" class="form-control" placeholder="Return date" required>
+                                    {% comment %} <input type="date" name="RentVehicle_Date_of_Return" class="form-control" placeholder="Return date" required> {% endcomment %}
                                 </div>
                                 <div class="col-4">
                                     <input type="submit" class="btn btn-success" value="Check Availability" />

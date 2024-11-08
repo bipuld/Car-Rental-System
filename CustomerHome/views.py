@@ -6,7 +6,7 @@ from Owner.models import Owner
 from Manager.models import Manager
 from Vehicles.models import Vehicle
 from RentVehicle.models import RentVehicle
-
+from django.core.paginator import Paginator
 from datetime import datetime
 from datetime import date
 
@@ -40,6 +40,9 @@ def index(request):
         return redirect('/Home/')
 
     vehicle = Vehicle.objects.all()
+    paginator = Paginator(vehicle, 4)  
+    page_number = request.GET.get('page')
+    vehicle = paginator.get_page(page_number)
     if('user_email' not in request.session and isLogout):
         isLogin = False
         isLogout = False
@@ -128,7 +131,13 @@ def Home(request):
     customer_email = request.session.get('user_email')
     customer = Customer.objects.get(customer_email=customer_email)
     vehicle = Vehicle.objects.all()
-    Message="Welcome Aboard!!"
+
+    paginator = Paginator(vehicle, 4)  
+    page_number = request.GET.get('page')
+    vehicle = paginator.get_page(page_number)
+    
+    Message=f"Welcome {customer.customer_firstname}"
+    
     return render(request,'Home.html',{'vehicle':vehicle,'Message':Message,'customer':customer})
 
 def Profile(request):

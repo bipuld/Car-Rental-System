@@ -1,8 +1,6 @@
 {% load static %}
-<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-gradient-dark shadow-lg" style="font-size: large;" aria-label="Main navigation">
-    <a href="/Owner" class="navbar-brand">
-        <img src="{% static 'img/Logos/icon.png' %}" height="50" alt="Logo" class="logo-img">
-    </a>
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: large;" aria-label="" aria-labbelledby="">
+    <a href="/Owner"><img class="navbar-brand" src="{% static 'img/Logos/icon.png' %}" height="50"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,10 +8,11 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/Owner" style="transition: color 0.3s;">Home</a>
+                <a class="nav-link" href="/Owner" style="color: #f1f1f1;">Home</a>
             </li>
+
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #f1f1f1;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Your Rentals
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -23,19 +22,18 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Customer's Rentals 
-                    <span class="badge badge-warning custom-badge">{{ no_of_pending_request }}</span>
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #f1f1f1;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Customer's Rentals <span class="badge badge-warning">{{no_of_pending_request}}</span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/Owner/RentRequest">Rent Requests <span class="badge badge-warning mx-2">{{ no_of_pending_request }}</span></a>
+                    <a class="dropdown-item" href="/Owner/RentRequest">Rent Requests <span class="badge badge-warning mx-2">{{no_of_pending_request}}</span></a>
                     <a class="dropdown-item" href="#">Rental History</a>
                     <a class="dropdown-item" href="/Owner/AllCustomers">View All Customers</a>
                 </div>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #f1f1f1;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Managers
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -45,7 +43,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" style="color: #f1f1f1;" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Vehicles
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -53,24 +51,27 @@
                     <a class="dropdown-item" href="/Owner/AllVehicles">View All Vehicles</a>
                 </div>
             </li>
+
         </ul>
 
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link" href="/Owner/Profile" title="Your Profile">
-                    <i class="fas fa-user-circles"></i> {{ owner.Owner_firstname }} {% block name %}{% endblock %}
-
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/Logout">
-                    <i class="fas fa-sign-out-alt"></i> Logout
-                </a>
+                <a class="nav-link" href="/Owner/Profile" style="color: #f1f1f1;" title="Your Profile">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" height="19px;" width="20px"class="profile-icon">
+                        <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/>
+                    </svg>
+                    {{ owner.Owner_firstname }} {% block name %}{%endblock%}</a>
             </li>
         </ul>
+
+        <ul class="navbar-nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link" href="/Logout" style="color: #f1f1f1;">Logout</a>
+            </li>
+        </ul>
+
     </div>
 </nav>
-
 <style>
     .navbar {
         background: linear-gradient(135deg, #0d1b2a, #1b3b4d); /* Gradient background */

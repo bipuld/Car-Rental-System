@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Tab Logo -->
-    <link rel="icon" href="{% static 'img/Logos/TabTop2Logo.png' %}" type="image/gif" sizes="18x18">
+    <link rel="icon" href="{% static 'img/Logos/favicon.png' %}" type="image/gif" sizes="18x18">
 
     <title>Fast Rentals - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/customer.css' %}">
@@ -23,41 +23,9 @@
 </head>
 
 <body>
-    <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: larger;" aria-label="" aria-labbelledby="">
-        <a href="/Home"><img class="navbar-brand" src="{% static 'img/Logos/Trial3Logo.png' %}" height="50"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/Home" style="color: #f1f1f1;">Home</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/SentRequests" style="color: #f1f1f1;">Sent Requests</a>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="#" style="color: #f1f1f1;">Previous Rentals</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Profile" style="color: #f1f1f1;" title="Your Profile">
-                        Hello! {% block name %}{%endblock%}</a>
-                </li>
-            </ul>
-
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link" href="/Logout" style="color: #f1f1f1;">
-                        Logout</a>
-                </li>
-            </ul>
-
-        </div>
-    </nav>
+    <!--Customer Landing page Navbar -->
+    {% include "includes/navbar.html" %}
 
     <!-- Side bar -->
 
@@ -175,18 +143,63 @@
             </div>
         </div>
 
-        <!-- pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
+        <!-- Landing page pagination -->
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <!-- Previous Page Controls -->
+                {% if vehicle.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span> <!-- Double left arrow for "First" -->
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span> <!-- Left arrow for "Previous" -->
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;&laquo;</span> <!-- Grayed-out double left arrow -->
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span> <!-- Grayed-out left arrow -->
+                    </li>
+                {% endif %}
+                
+                <!-- Page Numbers -->
+                {% for num in vehicle.paginator.page_range %}
+                    {% if vehicle.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                <!-- Next Page Controls -->
+                {% if vehicle.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span> <!-- Right arrow for "Next" -->
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span> <!-- Double right arrow for "Last" -->
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span> <!-- Grayed-out right arrow -->
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;&raquo;</span> <!-- Grayed-out double right arrow -->
+                    </li>
+                {% endif %}
             </ul>
         </nav>
 
