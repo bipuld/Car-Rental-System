@@ -9,21 +9,37 @@ from django.core.paginator import Paginator
 from datetime import datetime
 from datetime import date
 import os
+from RentVehicle.models import RentVehicle
 from VehicleRentingSystem.settings import MEDIA_ROOT
 
 # Create your views here.
 def index(request):
     if('user_email' not in request.session):
         return redirect('/signin/')
+    if request.method == 'POST':
+        print(request.POST)
+        print(request.session.get('user_email'),"Owner Search section part")
     owner_email = request.session.get('user_email')
     owner = Owner.objects.get(Owner_email=owner_email)
     vehicle = Vehicle.objects.all()
+   
     Message=f"Welcome {owner.Owner_firstname} {owner.Owner_lastname}"
     paginator = Paginator(vehicle, 4)  
     page_number = request.GET.get('page')      
     vehicle = paginator.get_page(page_number)
     no_of_pending_request=count_pending_rent_request()
-    return render(request,'Owner_index.html',{'vehicle':vehicle,'Message':Message,'owner':owner,'no_of_pending_request':no_of_pending_request})
+
+    context = {
+        'vehicle':vehicle,
+        'Message':Message,
+        'owner':owner,
+        'no_of_pending_request':no_of_pending_request,
+        "vehicle_types": ["Car", "Bike", "Bus", "Scooter", "Bicycle", "Tourist Van", "Truck"],
+        "companies": ["Maruti", "Audi", "Mercedes", "Toyota", "Tata", "Kia", "Tesla"],
+        "fuel_types": ["Petrol", "Diesel", "CNG", "Electric"],
+        "price_ranges": ["Under 1000", "1000-2000", "Above 2000"],
+    }
+    return render(request,'Owner_index.html',context)
 
 def Profile(request):
     if('user_email' not in request.session):
