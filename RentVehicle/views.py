@@ -23,9 +23,18 @@ def SendRequest_toOwner(request):
     RentVehicle_Total_amount=request.POST.get('RentVehicle_Total_amount','')
     Vehicle_license_plate=request.POST.get('Vehicle_license_plate','')
     RentVehicle_Date_of_Booking=request.POST.get('RentVehicle_Date_of_Booking','')
+    print(RentVehicle_Date_of_Booking, "sasadsadsadsadsadsdas",RentVehicle_Date_of_Return,)
 
-    RentVehicle_Date_of_Booking = datetime.strptime(RentVehicle_Date_of_Booking, '%B %d, %Y').date()
-    RentVehicle_Date_of_Return = datetime.strptime(RentVehicle_Date_of_Return, '%B %d, %Y').date()
+
+    print(RentVehicle_Date_of_Booking, "sasadsadsadsadsadsdas",RentVehicle_Date_of_Return,)
+    try:
+        # Convert from '%B %d, %Y' to '%Y-%m-%d'
+        RentVehicle_Date_of_Booking = datetime.strptime(RentVehicle_Date_of_Booking, "%b. %d, %Y").strftime("%Y-%m-%d")
+        RentVehicle_Date_of_Return = datetime.strptime(RentVehicle_Date_of_Return, "%b. %d, %Y").strftime("%Y-%m-%d")
+    except ValueError as e:
+        print(f"Date format error: {e}")
+
+    
     
     rentvehicle = RentVehicle(RentVehicle_Date_of_Booking=RentVehicle_Date_of_Booking,
     RentVehicle_Date_of_Return=RentVehicle_Date_of_Return,

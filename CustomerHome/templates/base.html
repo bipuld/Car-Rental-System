@@ -14,17 +14,78 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Tab Logo -->
-    <link rel="icon" href="{% static 'img/Logos/TabTop2Logo.png' %}" type="image/gif" sizes="18x18">
+    <link rel="icon" href="{% static 'img/Logos/favicon.png' %}" type="image/gif" sizes="18x18">
 
     <title>Fast Rentals - {% block title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static 'css/customer.css' %}">
     <script src="{% static 'js/customer.js' %}" type="text/javascript"></script>
 
+    <style>
+        .navbar {
+            background: linear-gradient(135deg, #0d1b2a, #1b3b4d); /* Gradient background */
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .navbar-nav .nav-link {
+            color: #f1f1f1;
+            padding: 12px 20px;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+    
+        .navbar-nav .nav-link:hover {
+            color: #ffc107 !important; /* Gold color on hover */
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+    
+        .navbar-nav .nav-link.active {
+            color: #ffc107 !important;
+            border-bottom: 2px solid #ffc107;
+        }
+    
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #007bff;
+            border-radius: 5px;
+        }
+    
+        .custom-badge {
+            background-color: #ff9900;
+            color: white;
+            font-size: 0.9rem;
+            padding: 4px 8px;
+            border-radius: 50%;
+        }
+    
+        .logo-img {
+            transition: transform 0.3s ease;
+        }
+    
+        .logo-img:hover {
+            transform: scale(1.1);
+        }
+    
+        .navbar-toggler:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        .fas {
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+        }
+    
+        .fas:hover {
+            transform: scale(1.1);
+        }
+    </style>
+    
 </head>
 
 <body>
     <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark" style="font-size: larger;" aria-label="" aria-labbelledby="">
-        <a href="\"><img class="navbar-brand" src="{% static 'img/Logos/Trial3Logo.png' %}" height="50"></a>
+        <a href="\"><img class="navbar-brand" src="{% static 'img/Logos/icon.png' %}" height="50"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -166,17 +227,62 @@
         </div>
 
         <!-- pagination -->
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-end">
-                <li class="page-item">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
+        <nav aria-label="Page navigation">
+            <ul class="pagination justify-content-center">
+                <!-- Previous Page Controls -->
+                {% if vehicle.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span> <!-- Double left arrow for "First" -->
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span> <!-- Left arrow for "Previous" -->
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;&laquo;</span> <!-- Grayed-out double left arrow -->
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span> <!-- Grayed-out left arrow -->
+                    </li>
+                {% endif %}
+                
+                <!-- Page Numbers -->
+                {% for num in vehicle.paginator.page_range %}
+                    {% if vehicle.number == num %}
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+                
+                <!-- Next Page Controls -->
+                {% if vehicle.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span> <!-- Right arrow for "Next" -->
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span> <!-- Double right arrow for "Last" -->
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span> <!-- Grayed-out right arrow -->
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;&raquo;</span> <!-- Grayed-out double right arrow -->
+                    </li>
+                {% endif %}
             </ul>
         </nav>
 
