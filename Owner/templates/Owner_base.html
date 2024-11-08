@@ -149,57 +149,57 @@
             <ul class="pagination justify-content-center">
                 <!-- Previous Page Controls -->
                 {% if vehicle.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page=1" aria-label="First">
-                        <span aria-hidden="true">&#x21A9;&#x21A9;</span> <!-- Double left arrow for "First" -->
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ vehicle.previous_page_number }}" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span> <!-- Left arrow for "Previous" -->
-                    </a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1" aria-label="First">
+                            <span aria-hidden="true">&laquo;&laquo;</span> <!-- Double left arrow for "First" -->
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.previous_page_number }}" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span> <!-- Left arrow for "Previous" -->
+                        </a>
+                    </li>
                 {% else %}
-                <li class="page-item disabled">
-                    <span class="page-link">&#x21A9;&#x21A9;</span> <!-- Grayed-out double left arrow -->
-                </li>
-                <li class="page-item disabled">
-                    <span class="page-link">&laquo;</span> <!-- Grayed-out left arrow -->
-                </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;&laquo;</span> <!-- Grayed-out double left arrow -->
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&laquo;</span> <!-- Grayed-out left arrow -->
+                    </li>
                 {% endif %}
                 
                 <!-- Page Numbers -->
                 {% for num in vehicle.paginator.page_range %}
                     {% if vehicle.number == num %}
-                    <li class="page-item active">
-                        <span class="page-link">{{ num }}</span>
-                    </li>
+                        <li class="page-item active">
+                            <span class="page-link">{{ num }}</span>
+                        </li>
                     {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
-                    </li>
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+                        </li>
                     {% endif %}
                 {% endfor %}
                 
                 <!-- Next Page Controls -->
                 {% if vehicle.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ vehicle.next_page_number }}" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span> <!-- Right arrow for "Next" -->
-                    </a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ vehicle.paginator.num_pages }}" aria-label="Last">
-                        <span aria-hidden="true">&#x23F9;</span> <!-- Double right arrow for "Last" -->
-                    </a>
-                </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.next_page_number }}" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span> <!-- Right arrow for "Next" -->
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ vehicle.paginator.num_pages }}" aria-label="Last">
+                            <span aria-hidden="true">&raquo;&raquo;</span> <!-- Double right arrow for "Last" -->
+                        </a>
+                    </li>
                 {% else %}
-                <li class="page-item disabled">
-                    <span class="page-link">&raquo;</span> <!-- Grayed-out right arrow -->
-                </li>
-                <li class="page-item disabled">
-                    <span class="page-link"><<</span> <!-- Grayed-out double right arrow -->
-                </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;</span> <!-- Grayed-out right arrow -->
+                    </li>
+                    <li class="page-item disabled">
+                        <span class="page-link">&raquo;&raquo;</span> <!-- Grayed-out double right arrow -->
+                    </li>
                 {% endif %}
             </ul>
         </nav>
@@ -207,8 +207,6 @@
         
 
     </div>
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js " integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN " crossorigin="anonymous "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js " integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q " crossorigin="anonymous "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js " integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl " crossorigin="anonymous "></script>
