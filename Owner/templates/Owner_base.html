@@ -31,17 +31,20 @@
             <div class="col-sm-3" style="height: auto; background: linear-gradient(135deg, #0d1b2a, #1B3BB2); color: white; padding: 20px 10px;" id="demo">
                 <div class="row">
                     <div class="col-sm">
-                        <label class="sr-only" for="inlineFormInputGroup">Search</label>
-                        <div class="input-group mb-3"> 
-                            <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="border-radius: 20px; padding: 10px;">
+                        <label class="sr-only" for="searchInput">Search</label>
+                        <div class="input-group mb-3">
+                            <input type="search" class="form-control" id="searchInput" placeholder="Search" style="border-radius: 20px; padding: 10px;">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" style="border-radius: 50%;"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary" type="button" id="searchButton" style="border-radius: 50%;">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 
-                <div class="row">
+                <div class="row" id="vehicleContainer" >
                     <div class="col-sm">
                         <form method="post">
                             {% csrf_token %}
@@ -168,7 +171,79 @@
     </div>
     {% include "includes/owner_footer.html" %}
 
-
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const autocompleteContainer = document.getElementById('autocomplete-container');
+    
+        // Event listener for input field to show autocomplete suggestions
+        searchInput.addEventListener('input', function() {
+            const query = this.value;
+    
+            // Only fetch suggestions if query length is more than 1
+            if (query.length > 1) {
+                fetch(`/search/?query=${encodeURIComponent(query)}`, {
+                    method: "GET",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    // Clear previous suggestions
+                    autocompleteContainer.innerHTML = '';
+    
+                    // Populate suggestions from fetched data
+                    data.vehicles.forEach(vehicle => {
+                        const suggestion = document.createElement('div');
+                        suggestion.className = 'autocomplete-suggestion';
+                        suggestion.textContent = `${vehicle.Vehicle_company} - ${vehicle.Vehicle_type}`;
+    
+                        // Set input value to the suggestion on click and clear suggestions
+                        suggestion.addEventListener('click', function() {
+                            searchInput.value = this.textContent;
+                            autocompleteContainer.innerHTML = '';
+                        });
+    
+                        autocompleteContainer.appendChild(suggestion);
+                    });
+                })
+                .catch(error => console.error("Error fetching search results:", error));
+            } else {
+                autocompleteContainer.innerHTML = '';
+            }
+        });
+    
+        // Event listener for search button to fetch and display vehicles based on query
+        document.getElementById('searchButton').addEventListener('click', function() {
+            const query = searchInput.value;
+    
+            fetch(`/search/?query=${encodeURIComponent(query)}`, {
+                method: "GET",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const vehicleContainer = document.getElementById('vehicleContainer');
+                vehicleContainer.innerHTML = '';  // Clear existing results
+    
+                // Populate vehicle results
+                data.vehicles.forEach(vehicle => {
+                    const vehicleElement = document.createElement('div');
+                    vehicleElement.className = 'vehicle-item';
+                    vehicleElement.innerHTML = `
+                        <h5>${vehicle.Vehicle_company} - ${vehicle.Vehicle_type}</h5>
+                        <p>Fuel: ${vehicle.Vehicle_fuel}</p>
+                        <p>Price: ${vehicle.Vehicle_price}</p>
+                    `;
+                    vehicleContainer.appendChild(vehicleElement);
+                });
+            })
+            .catch(error => console.error("Error fetching search results:", error));
+        });
+    </script>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
