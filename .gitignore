@@ -6,6 +6,8 @@ __pycache__/
 # C extensions
 *.so
 
+activate.bat
+
 # Distribution / packaging
 .Python
 build/
@@ -54,7 +56,7 @@ cover/
 # Translations
 *.mo
 *.pot
-
+media
 # Django stuff:
 *.log
 local_settings.py
