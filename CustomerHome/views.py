@@ -14,7 +14,7 @@ isLogin = False
 isLogout = False
 
 # Create your views here.
-def index(request):
+def index(request): #home page without login the authentication
     global isLogin
     global isLogout
 
@@ -125,13 +125,13 @@ def Logout(request):
     Message = "Successfully Logged Out!!"
     return redirect('/')
 
-def Home(request):
+def Home(request): #login home customer page
     if('user_email' not in request.session):
         return redirect('/signin/')
     customer_email = request.session.get('user_email')
     customer = Customer.objects.get(customer_email=customer_email)
     vehicle = Vehicle.objects.all()
-
+    print(request.session.get('user_email'),"Customer Search section part")
     paginator = Paginator(vehicle, 4)  
     page_number = request.GET.get('page')
     vehicle = paginator.get_page(page_number)

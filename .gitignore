@@ -56,7 +56,7 @@ cover/
 # Translations
 *.mo
 *.pot
-
+media
 # Django stuff:
 *.log
 local_settings.py

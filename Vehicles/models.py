@@ -19,5 +19,10 @@ class Vehicle(models.Model):
     Vehicle_description = models.CharField(max_length=1500)
     Vehicle_price = models.IntegerField()
 
+    def save(self, *args, **kwargs):
+        # Capitalize the first letter of each word in the Vehicle_company field
+        if self.Vehicle_company:
+            self.Vehicle_company = self.Vehicle_company.title()
+        super().save(*args, **kwargs)
     def __str__(self):
         return self.Vehicle_license_plate + " : " + str(self.Vehicle_name)
