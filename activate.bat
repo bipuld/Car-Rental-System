@@ -1,0 +1,1 @@
+C:\Users\Bipul\Desktop\project\env\Scripts\activate.bat

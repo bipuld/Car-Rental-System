@@ -6,7 +6,7 @@ __pycache__/
 # C extensions
 *.so
 
-activate.bat
+media
 
 # Distribution / packaging
 .Python
