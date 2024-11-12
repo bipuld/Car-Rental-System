@@ -30,118 +30,73 @@
             <div class="col-sm-3" style="height: auto; background: linear-gradient(135deg, #0d1b2a, #1B3BB2); color: white; padding: 20px 10px;" id="demo">
                 <div class="row">
                     <div class="col-sm">
-                        <label class="sr-only" for="inlineFormInputGroup">Search</label>
-                        <div class="input-group mb-3"> 
-                            <input type="search" class="form-control" id="inlineFormInputGroup" placeholder="Search" style="border-radius: 20px; padding: 10px;">
+                        <label class="sr-only" for="searchInput">Search</label>
+                        <div class="input-group mb-3">
+                            <input type="search" class="form-control" id="searchInput" placeholder="Search" style="border-radius: 20px; padding: 10px;">
                             <div class="input-group-append">
-                                <button class="btn btn-primary" type="button" style="border-radius: 50%;"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary" type="button" id="searchButton" style="border-radius: 50%;">
+                                    <i class="fa fa-search"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
+                    
                 </div>
                 
-                <div class="row">
+                <div class="row" id="vehicleContainer" >
                     <div class="col-sm">
-                        <form>
+                        <form method="post">
+                            {% csrf_token %}
+                            
+                            <!-- Vehicle Types -->
                             <div class="form-group">
                                 <strong class="text-white">Vehicle Types</strong>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Car">
-                                    <label class="form-check-label" for="Car">Car</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Bike">
-                                    <label class="form-check-label" for="Bike">Bike</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Bus">
-                                    <label class="form-check-label" for="Bus">Bus</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Scooter">
-                                    <label class="form-check-label" for="Scooter">Scooter</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Bicycle">
-                                    <label class="form-check-label" for="Bicycle">Bicycle</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="TouristVan">
-                                    <label class="form-check-label" for="TouristVan">Tourist Van</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Truck">
-                                    <label class="form-check-label" for="Truck">Truck</label>
-                                </div>
+                                {% for vehicle_type in vehicle_types %}
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="vehicle_type" value="{{ vehicle_type }}" id="{{ vehicle_type }}">
+                                        <label class="form-check-label" for="{{ vehicle_type }}">{{ vehicle_type }}</label>
+                                    </div>
+                                {% endfor %}
                             </div>
-    
+                        
+                            <!-- Companies -->
                             <div class="form-group">
                                 <strong class="text-white">Companies</strong>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Maruti">
-                                    <label class="form-check-label" for="Maruti">Maruti</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Audi">
-                                    <label class="form-check-label" for="Audi">Audi</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Mercedes">
-                                    <label class="form-check-label" for="Mercedes">Mercedes</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Toyota">
-                                    <label class="form-check-label" for="Toyota">Toyota</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Tata">
-                                    <label class="form-check-label" for="Tata">Tata</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Kia">
-                                    <label class="form-check-label" for="Kia">Kia</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Tesla">
-                                    <label class="form-check-label" for="Tesla">Tesla</label>
-                                </div>
+                                {% for company in companies %}
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="company" value="{{ company }}" id="{{ company }}">
+                                        <label class="form-check-label" for="{{ company }}">{{ company }}</label>
+                                    </div>
+                                {% endfor %}
                             </div>
-    
+                        
+                            <!-- Fuel Types -->
                             <div class="form-group">
                                 <strong class="text-white">Fuel Type</strong>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Petrol">
-                                    <label class="form-check-label" for="Petrol">Petrol</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Diesel">
-                                    <label class="form-check-label" for="Diesel">Diesel</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="CNG">
-                                    <label class="form-check-label" for="CNG">CNG</label>
-                                </div>
-                                <div class="form-check">
-                                    <input type="checkbox" class="form-check-input" id="Electric">
-                                    <label class="form-check-label" for="Electric">Electric</label>
-                                </div>
+                                {% for fuel in fuel_types %}
+                                    <div class="form-check">
+                                        <input type="checkbox" class="form-check-input" name="fuel" value="{{ fuel }}" id="{{ fuel }}">
+                                        <label class="form-check-label" name="fuel-type" value="{{ fuel }}" for="{{ fuel }}">{{ fuel }}</label>
+                                    </div>
+                                {% endfor %}
                             </div>
-    
+                        
+                            <!-- Price Range -->
                             <div class="form-group">
                                 <strong class="text-white">Price Range</strong>
-                                <a href="#" style="color: white;">
+                                {% for price in price_ranges %}
                                     <div class="form-check">
-                                        <label class="form-check-label" for="price" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='white'">Under ₹1000</label>
+                                        <label class="form-check-label" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='white'">
+                                            <input type="radio" name="price_range" value="{{ price }}"> {{ price }}
+                                        </label>
                                     </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="price" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='white'">₹1000 - ₹2000</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <label class="form-check-label" for="price" style="cursor: pointer;" onMouseOver="this.style.color='tomato'" onMouseOut="this.style.color='white'">Above ₹2000</label>
-                                    </div>
-                                </a>
+                                {% endfor %}
                             </div>
+                        
+                            <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+                        
+                        
                     </div>
                 </div>
             </div>

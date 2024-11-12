@@ -16,15 +16,62 @@ def index(request):
         return redirect('/signin/')
     print(request.session.get('user_email'),"Manager Search section part")
     manager_email = request.session.get('user_email')
+
+    vehicle_queryset = Vehicle.objects.all()
+    if request.method == 'POST':
+
+        vehicle_type = request.POST.get('vehicle_type')
+        companies = request.POST.getlist('company')
+        fuel_types = request.POST.getlist('fuel')
+        price_range = request.POST.get('price_range')
+        
+        if vehicle_type:
+            vehicle_queryset = vehicle_queryset.filter(Vehicle_type=vehicle_type)
+        
+       
+        if companies:
+            vehicle_queryset = vehicle_queryset.filter(Vehicle_company__in=companies)
+        
+
+        if fuel_types:
+            vehicle_queryset = vehicle_queryset.filter(Vehicle_fuel__in=fuel_types)
+        
+
+        if price_range:
+            if price_range == "Under 1000":
+                vehicle_queryset = vehicle_queryset.filter(Vehicle_price__lt=1000)
+            elif price_range == "1000-2000":
+                vehicle_queryset = vehicle_queryset.filter(Vehicle_price__gte=1000, Vehicle_price__lte=2000)
+            elif price_range == "Above 2000":
+                vehicle_queryset = vehicle_queryset.filter(Vehicle_price__gt=2000)
+
     manager = Manager.objects.get(Manager_email=manager_email)
     vehicle = Vehicle.objects.all()
     Message=f"Welcome {manager.Manager_firstname}"
 
-    paginator = Paginator(vehicle, 4)  
+    paginator = Paginator(vehicle_queryset, 4)  
     page_number = request.GET.get('page')
-    vehicle = paginator.get_page(page_number)
+    vehicle_page = paginator.get_page(page_number)
 
     no_of_pending_request=count_pending_rent_request()
+
+    context = {
+        'vehicle': vehicle_page,
+        'Message': Message,
+        'manager': manager,
+        'no_of_pending_request': no_of_pending_request,
+        "vehicle_types": ["Car", "Bike", "Bus", "Scooter", "Bicycle", "Tourist Van", "Truck"],
+        "companies": [
+            "Maruti", "Audi", "Mercedes", "Toyota", "Tata", "Kia", "Tesla", "Hyundai", 
+            "Mahindra", "Honda", "Ford", "Renault", "Nissan", "MG", "Volkswagen",
+            "Skoda", "Isuzu", "Datsun", "Bajaj", "Hero", "TVS", "Royal Enfield", 
+            "Yamaha", "Suzuki", "Piaggio", "Ashok Leyland", "Force Motors", "Eicher"
+        ],
+        "fuel_types": ["Petrol", "Diesel", "CNG", "Electric"],
+        "price_ranges": ["Under 1000", "1000-2000", "Above 2000"],
+    }
+    
+    return render(request, 'Owner_index.html', context)
     return render(request,'Manager_index.html',{'vehicle':vehicle,'Message':Message,'manager':manager,'no_of_pending_request':no_of_pending_request})
 
 def Profile(request):

@@ -56,7 +56,7 @@ def index(request):
     owner = Owner.objects.get(Owner_email=owner_email)
     message = f"Welcome {owner.Owner_firstname} {owner.Owner_lastname}"
     no_of_pending_request = count_pending_rent_request()
-    print(query,"Search Query")
+
 
     context = {
         'vehicle': vehicle_page,
