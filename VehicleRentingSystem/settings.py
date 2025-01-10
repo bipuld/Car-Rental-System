@@ -25,7 +25,7 @@ SECRET_KEY = 'f$*#w3#uml%@ip)b45(1v=+31+df!*&04e*d#kn%6tsc57qt_1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
