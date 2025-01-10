@@ -7,7 +7,7 @@ from Manager.models import Manager
 
 from datetime import datetime
 
-# Create your views here.
+# Create your views here.cx
 def index(request):
     return render(request,'RentVehicle/index.html')
 
