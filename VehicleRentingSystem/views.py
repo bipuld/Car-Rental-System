@@ -14,6 +14,6 @@ def custom_500(request):
 
 
 
-def trigger_500_error(request):
+# def trigger_500_error(request):
   
-    raise Exception("This is a test 500 error.")
+#     raise Exception("This is a test 500 error.")

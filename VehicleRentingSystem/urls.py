@@ -26,5 +26,5 @@ urlpatterns = [
     path('Vehicles/',include('Vehicles.urls')),
 
 
-    path('trigger-500/', views.trigger_500_error),
+    # path('trigger-500/', views.trigger_500_error),
 ]
