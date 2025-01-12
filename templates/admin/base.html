@@ -1,0 +1,27 @@
+{% extends "admin/base.html" %}
+{% load static %}
+
+{% block branding %}
+<h1 id="header">
+    <a href="/admin">
+        <img src="{% static 'images/logo.png' %}" alt="Admin Logo" class="brand_img" height="50" width="300">
+        Admin Panel
+    </a>
+</h1>
+{% endblock branding %}
+
+{% block extrastyle %}
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static 'css/admin.css' %}">
+{% endblock %}
+
+{% block sidebar %}
+<div class="sidebar fade-in">
+    <h2>Navigation</h2>
+    <a href="/admin/CustomerHome/customer/">Customer Page Admin</a><br>
+    <a href="/admin/Manager/manager/">Manager Page Admin</a><br>
+    <a href="/admin/RentVehicle/rentvehicle/">Rent Vechile Admin</a><br>
+    <a href="/admin/Vehicles/vehicle/">Vechile Admin</a><br>
+    <a href="/admin/logout">Logout</a>
+</div>
+{% endblock %}
