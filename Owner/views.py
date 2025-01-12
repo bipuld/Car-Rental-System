@@ -65,8 +65,10 @@ def index(request):
         'no_of_pending_request': no_of_pending_request,
         "vehicle_types": ["Car", "Bike", "Bus", "Scooter", "Bicycle", "Tourist Van", "Truck"],
         "companies": [
-            "Maruti", "Audi", "Mercedes", "Toyota", "Tata", "Kia", "Tesla", "Hyundai", 
-            "Mahindra", "Honda", "Ford", "Renault", "Nissan", "MG", "Volkswagen",
+            "Maruti", "Audi", "Mercedes", "Toyota", "Tata", "Kia", "Tesla", "Hyundai", "Land Rover", "MG", "Volkswagen", "BMW", "Jaguar", "Jeep", "Porsche", "Volvo",
+            "Mahindra", "Honda", "Ford", "Renault", "Nissan", "Skoda", "Peugeot", "Fiat", "Mitsubishi", "Isuzu", "Suzuki", "Changan", "BYD", "SAIC", "Great Wall Motors", "Fisker"
+
+
             "Skoda", "Isuzu", "Datsun", "Bajaj", "Hero", "TVS", "Royal Enfield", 
             "Yamaha", "Suzuki", "Piaggio", "Ashok Leyland", "Force Motors", "Eicher"
         ],

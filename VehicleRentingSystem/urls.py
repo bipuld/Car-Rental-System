@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -22,5 +23,8 @@ urlpatterns = [
     path('OwnerHome/',include('Owner.urls')),
     path('ManagerHome/',include('Manager.urls')),
     path('RentVehicle/',include('RentVehicle.urls')),
-    path('Vehicles/',include('Vehicles.urls'))
+    path('Vehicles/',include('Vehicles.urls')),
+
+
+    path('trigger-500/', views.trigger_500_error),
 ]
