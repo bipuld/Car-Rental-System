@@ -1,7 +1,7 @@
 #Created by Yash
-from django.http import HttpResponse
+# from django.http import HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponseServerError
+# from django.http import HttpResponseServerError
 
 
 
