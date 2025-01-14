@@ -71,7 +71,7 @@ def index(request):
         "price_ranges": ["Under 1000", "1000-2000", "Above 2000"],
     }
     
-    return render(request, 'Owner_index.html', context)
+    # return render(request, 'Owner_index.html', context)
     return render(request,'Manager_index.html',{'vehicle':vehicle,'Message':Message,'manager':manager,'no_of_pending_request':no_of_pending_request})
 
 def Profile(request):
@@ -79,6 +79,7 @@ def Profile(request):
         return redirect('/signin/')
     manager_email = request.session.get('user_email')
     manager = Manager.objects.get(Manager_email=manager_email)
+
     no_of_pending_request=count_pending_rent_request()
     return render(request,'Manager_Profile.html',{'manager':manager,'no_of_pending_request':no_of_pending_request})
 

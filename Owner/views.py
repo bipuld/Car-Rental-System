@@ -51,7 +51,8 @@ def index(request):
     page_number = request.GET.get('page')
     vehicle_page = paginator.get_page(page_number)
 
-
+ 
+ 
     owner_email = request.session.get('user_email')
     owner = Owner.objects.get(Owner_email=owner_email)
     message = f"Welcome {owner.Owner_firstname} {owner.Owner_lastname}"
@@ -65,7 +66,7 @@ def index(request):
         'no_of_pending_request': no_of_pending_request,
         "vehicle_types": ["Car", "Bike", "Bus", "Scooter", "Bicycle", "Tourist Van", "Truck"],
         "companies": [
-            "Maruti", "Audi", "Mercedes", "Toyota", "Tata", "Kia", "Tesla", "Hyundai", "Land Rover", "MG", "Volkswagen", "BMW", "Jaguar", "Jeep", "Porsche", "Volvo",
+        "Maruti", "Audi", "Mercedes", "Toyota", "Tata", "Kia", "Tesla", "Hyundai", "Land Rover", "MG", "Volkswagen", "BMW", "Jaguar", "Jeep", "Porsche", "Volvo",
             "Mahindra", "Honda", "Ford", "Renault", "Nissan", "Skoda", "Peugeot", "Fiat", "Mitsubishi", "Isuzu", "Suzuki", "Changan", "BYD", "SAIC", "Great Wall Motors", "Fisker"
 
 
