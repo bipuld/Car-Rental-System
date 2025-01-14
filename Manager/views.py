@@ -72,7 +72,8 @@ def index(request):
     }
     
     # return render(request, 'Owner_index.html', context)
-    return render(request,'Manager_index.html',{'vehicle':vehicle,'Message':Message,'manager':manager,'no_of_pending_request':no_of_pending_request})
+    # return render(request,'Manager_index.html',{'vehicle':vehicle,'Message':Message,'manager':manager,'no_of_pending_request':no_of_pending_request})
+    return render(request,'Manager_index.html',context)
 
 def Profile(request):
     if('user_email' not in request.session):
