@@ -1,13 +1,10 @@
-{%extends 'Customer_only_navbar_Loggedin.html'%} {% load static %}
+{% extends 'Customer_only_navbar_loggedin.html'%} {% load static %}
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
     <meta charset="UTF-8" />
     <title>{% block title %}Vehicle Details {% endblock %}</title>
 </head>
-
 <body>
     {% block name %}{{customer.customer_firstname}}{%endblock%} {% block pagecontent %}
     <div class="container my-5">

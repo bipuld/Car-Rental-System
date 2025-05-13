@@ -1,1 +1,1 @@
-C:\Users\Bipul\Desktop\project\env\Scripts\activate.bat
+E:\coding\python\django\Car_Rental_System\venv\Scripts\activate.bat

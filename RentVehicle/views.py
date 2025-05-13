@@ -28,19 +28,16 @@ def SendRequest_toOwner(request):
 
     print(RentVehicle_Date_of_Booking, "sasadsadsadsadsadsdas",RentVehicle_Date_of_Return,)
     try:
-        # Convert from '%B %d, %Y' to '%Y-%m-%d'
-        RentVehicle_Date_of_Booking = datetime.strptime(RentVehicle_Date_of_Booking, "%b. %d, %Y").strftime("%Y-%m-%d")
-        RentVehicle_Date_of_Return = datetime.strptime(RentVehicle_Date_of_Return, "%b. %d, %Y").strftime("%Y-%m-%d")
+        RentVehicle_Date_of_Booking = datetime.strptime(RentVehicle_Date_of_Booking, "%B %d, %Y").strftime("%Y-%m-%d")
+        RentVehicle_Date_of_Return = datetime.strptime(RentVehicle_Date_of_Return, "%B %d, %Y").strftime("%Y-%m-%d")
     except ValueError as e:
         print(f"Date format error: {e}")
 
-    
-    
+        
     rentvehicle = RentVehicle(RentVehicle_Date_of_Booking=RentVehicle_Date_of_Booking,
     RentVehicle_Date_of_Return=RentVehicle_Date_of_Return,
     Total_days=Total_days,RentVehicle_Total_amount=RentVehicle_Total_amount,
     Vehicle_license_plate=Vehicle_license_plate,customer_email=user_email)
-
     rentvehicle.save()
 
     customer = Customer.objects.filter(customer_email=user_email)
